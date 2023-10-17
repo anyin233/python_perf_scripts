@@ -1,6 +1,5 @@
 import numpy as np
 from argparse import ArgumentParser
-import math
 import concurrent.futures
 def vallina(a, b):
     m = len(a)
