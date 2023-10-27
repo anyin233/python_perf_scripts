@@ -14,12 +14,16 @@ def axpy(y, x, a):
 
 N = 1 << 30
 
-x = np.random.rand(N)
-a = np.random.rand(1)
-y = np.zeros(N)
+iter = 10
 
-x = x.dot(a[0])
-threadsperblock = 32
-blockpergrid = (x.size + (threadsperblock - 1)) // threadsperblock
-axpy[blockpergrid, threadsperblock](y, x, a)
-axpy[blockpergrid, threadsperblock](x, y, a)
+for i in range(21, 21 + iter):
+    N = 1 << i
+    x = np.random.rand(N)
+    a = np.random.rand(1)
+    y = np.zeros(N)
+
+    x = x.dot(a[0])
+    threadsperblock = 32
+    blockpergrid = (x.size + (threadsperblock - 1)) // threadsperblock
+    axpy[blockpergrid, threadsperblock](y, x, a)
+    axpy[blockpergrid, threadsperblock](x, y, a)
